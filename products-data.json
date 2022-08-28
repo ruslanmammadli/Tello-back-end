@@ -1,0 +1,33 @@
+[
+    {
+        "name":"Apple iPhone 13",
+        "price":2089,
+        "size":["128GB","256GB","512GB"],
+        "colors":["qara","göy","ağ","qırmızı"],
+        "imageCover":"https://cdn.chec.io/merchants/43840/assets/qLghhUsKAjGAcBSY%7CRectangle%20158.png",
+        "images":["https://cdn.chec.io/merchants/43840/assets/qLghhUsKAjGAcBSY%7CRectangle%20158.png",
+        "https://cdn.chec.io/merchants/43840/assets/hZT2bYpJFNevvLYs%7CXJylOKCD9L60dufu_New%20Project-min.png",
+        "https://cdn.chec.io/merchants/43840/assets/dUxxClSfGFaIvqjZ%7CDYh1ifdr950tzhRd_New%20Project%20(2).png",
+        "https://cdn.chec.io/merchants/43840/assets/ShxC4JyxOwU2yEbs%7CkBdH1yCShxvSAXlK_New%20Project%20(3).png",
+        "https://cdn.chec.io/merchants/43840/assets/gUD7Sem3DH1F1Z3F%7CcMpjzKcOFkaW4NNO_New%20Project%20(1).png"]
+    },
+    {
+        "name":"Samsung Galaxy S22",
+        "price":1750,
+        "size":["128GB","256GB"],
+        "colors":["ağ","qara","yaşıl"],
+        "imageCover":"https://cdn.chec.io/merchants/43840/assets/atLIbgBDNaGzaTcJ%7CQNwY9kDHdQuyekwQ_New%20Project%20(4).png",
+        "images":["https://cdn.chec.io/merchants/43840/assets/atLIbgBDNaGzaTcJ%7CQNwY9kDHdQuyekwQ_New%20Project%20(4).png",
+        "https://cdn.chec.io/merchants/43840/assets/ZbJXlC6sZtUsyE6X%7CMtMrAL3CIH9pMULh_New%20Project%20(6).png",
+        "https://cdn.chec.io/merchants/43840/assets/juQQY6UfPuCOy5io%7CwKxuiPWTZwzQYPzT_New%20Project%20(5).png"]
+    }
+    ,
+    {
+        "name":"Xiaomi 12",
+        "price":1250,
+        "size":["128GB","256GB"],
+        "colors":["göy","qara"],
+        "imageCover":"https://cdn.chec.io/merchants/43840/assets/8gn338HxTyumlxua%7Cp12lN4ROu37KwBoD_New%20Project%20(7).png",
+        "images":["https://cdn.chec.io/merchants/43840/assets/wZuEpdltHdMJm7LE%7CmYADbavWdQv8qWHe_mi12.png","https://cdn.chec.io/merchants/43840/assets/8gn338HxTyumlxua%7Cp12lN4ROu37KwBoD_New%20Project%20(7).png"]
+    }
+]
