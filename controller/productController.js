@@ -1,8 +1,14 @@
 const Product = require("../model/productSchema")
+const GlobalFilter = require("../utils/GlobalFilter")
 
 exports.getAllProducts = async (req,res) => {
     try {
-        const products= await Product.find()
+
+        let allProducts = new GlobalFilter(Product.find(), req.query)
+        allProducts
+        .filter()
+
+        const products = await allProducts.query
 
         res.json({
             success:true,

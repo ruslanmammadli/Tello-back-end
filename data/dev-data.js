@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 require("dotenv").config({ path: "../config.env" });
 const fs = require("fs");
 const Product = require("../model/productSchema");
+const { dirname } = require("path");
 
 //! MongoDB connection
 const PORT = process.env.PORT || 5000;
@@ -12,7 +13,7 @@ mongoose.connect(DB, (err) => {
 
   console.log("MongoDb connected");
 
-  const products = JSON.parse(fs.readFileSync(`../products-data.json`));
+  const products = JSON.parse(fs.readFileSync(`${__dirname}/../products-data.json`));
 
   async function importData() {
     try {
