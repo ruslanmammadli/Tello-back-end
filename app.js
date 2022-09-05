@@ -2,6 +2,8 @@ const express = require("express")
 const morgan = require("morgan")
 const mongoose = require("mongoose")
 require("dotenv").config({path:"./config.env"})
+const errorHandler=require("./error/errorHandler")
+const GlobalError=require("./error/GlobalError")
 
 const productRouter=require("./routes/productRouter")
 
@@ -18,6 +20,13 @@ app.use(express.json())
 
 //!Routes
 app.use("/api/v1/products",productRouter);
+
+app.use((req,res,next) => {
+    const message = new GlobalError(`The ${req.originalUrl} does not exists!`)
+    next(message)
+})
+
+app.use(errorHandler)
 
 //! MongoDB connection
 const PORT = process.env.PORT || 5000;

@@ -30,4 +30,47 @@
         "imageCover":"https://cdn.chec.io/merchants/43840/assets/8gn338HxTyumlxua%7Cp12lN4ROu37KwBoD_New%20Project%20(7).png",
         "images":["https://cdn.chec.io/merchants/43840/assets/wZuEpdltHdMJm7LE%7CmYADbavWdQv8qWHe_mi12.png","https://cdn.chec.io/merchants/43840/assets/8gn338HxTyumlxua%7Cp12lN4ROu37KwBoD_New%20Project%20(7).png"]
     }
+    ,
+    {
+        "name":"Apple iPhone SE",
+        "price":1500,
+        "size":["128GB","256GB"],
+        "colors":["ağ","qara","qırmızı"],
+        "imageCover":"https://cdn.chec.io/merchants/43840/assets/9yfcMoRtpQniiTLA%7Cf1L5raEngHezf06T_New%20Project%20(9).png",
+        "images":["https://cdn.chec.io/merchants/43840/assets/9yfcMoRtpQniiTLA%7Cf1L5raEngHezf06T_New%20Project%20(9).png",
+        "https://cdn.chec.io/merchants/43840/assets/N3tOdnzX4dBv6WxF%7ChyVojWbhmf4jPxSg_New%20Project%20(10).png",
+        "https://cdn.chec.io/merchants/43840/assets/7dn3hg0e527R5Tot%7CsViZ37ihxztI3Tu8_se%202022.png"]
+    }
+    ,
+    {
+        "name":"Huawei P50 Pro",
+        "price":2660,
+        "size":["128GB","256GB"],
+        "colors":["ağ","qara"],
+        "imageCover":"https://cdn.chec.io/merchants/43840/assets/jxn9B9e1924is0mr%7COOrJ0iPZLZguHFNf_New%20Project%20(12).png",
+        "images":["https://cdn.chec.io/merchants/43840/assets/hrttEDzn7xAgg2qo%7CRhnw8Ym0sVmUwXT1_New%20Project%20(11).png","https://cdn.chec.io/merchants/43840/assets/jxn9B9e1924is0mr%7COOrJ0iPZLZguHFNf_New%20Project%20(12).png"]
+    }
+    ,
+    {
+        "name":"OnePlus 10 Pro",
+        "price":2050,
+        "size":["256GB","512GB"],
+        "colors":["yaşıl","qara"],
+        "imageCover":"https://cdn.chec.io/merchants/43840/assets/I1h8tA43XJRjxqQK%7CNTPgfZYe3KWM2vyI_New%20Project%20(26).png",
+        "images":["https://cdn.chec.io/merchants/43840/assets/I1h8tA43XJRjxqQK%7CNTPgfZYe3KWM2vyI_New%20Project%20(26).png",
+        "https://cdn.chec.io/merchants/43840/assets/v0svR6R4d72sfaSl%7CeuTNbKd7euqqkYoo_New%20Project%20(25).png",
+        "https://cdn.chec.io/merchants/43840/assets/DsWqOjppWVIjLe7F%7CiSQNzGG6wm8JhrKR_OnePlus-10-Pro.png"]
+    }
+    ,
+    {
+        "name":"Xiaomi Mi 11 Lite",
+        "price":699,
+        "size":["128GB","256GB"],
+        "colors":["ağ","qara","yaşıl","göy"],
+        "imageCover":"https://cdn.chec.io/merchants/43840/assets/VmrD8Xf2n7CvpN0N%7CCxiOFr6E4EKW2SnP_New%20Project%20(17).png",
+        "images":["https://cdn.chec.io/merchants/43840/assets/VmrD8Xf2n7CvpN0N%7CCxiOFr6E4EKW2SnP_New%20Project%20(17).png",
+        "https://cdn.chec.io/merchants/43840/assets/xfSt32DLyvEvJh7c%7Ce5kChtenkHYGwR1P_New%20Project%20(15).png",
+        "https://cdn.chec.io/merchants/43840/assets/gPokpnXuA8IQTDgG%7Crb4ybTg42i4TO4Cp_New%20Project%20(16).png",
+        "https://cdn.chec.io/merchants/43840/assets/JJGb5cX9wj3fLoCE%7C85FVK9jyYQ8C6ozb_New%20Project%20(14).png"]
+    }
 ]
