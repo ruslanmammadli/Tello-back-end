@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 require("dotenv").config({ path: "../config.env" });
 const fs = require("fs");
-const Product = require("../model/productSchema");
+const Product = require("../model/product");
 const { dirname } = require("path");
 
 //! MongoDB connection

@@ -6,6 +6,7 @@ const errorHandler=require("./error/errorHandler")
 const GlobalError=require("./error/GlobalError")
 
 const productRouter=require("./routes/productRouter")
+const userRouter=require("./routes/userRouter")
 
 //! Initilizing the App:
 const app = express()
@@ -20,6 +21,7 @@ app.use(express.json())
 
 //!Routes
 app.use("/api/v1/products",productRouter);
+app.use("/api/v1/users",userRouter);
 
 app.use((req,res,next) => {
     const message = new GlobalError(`The ${req.originalUrl} does not exists!`)

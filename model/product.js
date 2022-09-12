@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+// const validator = require('validator')
 
 const productSchema=mongoose.Schema({
         name:{
@@ -8,7 +8,7 @@ const productSchema=mongoose.Schema({
             unique: true,
             trim:true,
             minLength:[3, "Product name must be at leats 3 characters!"],
-            maxLength:[30, "Product name must not exceed 15 characters!"]
+            maxLength:[25, "Product name must not exceed 25 characters!"]
         },
         price:{
             type:Number,
