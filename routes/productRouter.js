@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const productController = require("../controller/productController")
-const {privateRoute} = require("../middleware/privateRoute")
+const {privateRoute, access} = require("../middleware/privateRoute")
 
 // GET //*Getting all products*//
 router.get("/",productController.getAllProducts)
@@ -13,10 +13,10 @@ router.get("/:id",productController.getOneProduct)
 router.post("/", privateRoute, productController.createProduct)
 
 //PATCH //*Update product*//
-router.patch("/:id", privateRoute, productController.updateProduct)
+router.patch("/:id", privateRoute, access("admin","guide"), productController.updateProduct)
 
 //DELETE //*Delete product*//
-router.delete("/:id", privateRoute, productController.deleteProduct)
+router.delete("/:id", privateRoute, access("admin"), productController.deleteProduct)
 
 
 module.exports=router;

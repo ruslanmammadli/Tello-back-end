@@ -36,20 +36,28 @@ const handleValidationError = (err) => {
     return new GlobalError(er)
 }
 
+const handleTokenExpire = (err) =>{
+    return new GlobalError("Session time out. Please Log in again", 403)
+}
+
+const handleTokenError = (err) =>{
+    return new GlobalError("Invalid Token", 403)
+}
+
 module.exports=(err,req,res,next)=>{
     const statusCode=err.statusCode || 500; 
 
     if (process.env.NODE_ENV === "development") {
         sendDevError(err,req,res,statusCode)
-       
+    
     }else if(process.env.NODE_ENV === "production"){
-        if (err.code === 11000) {
-            err = handlerDuplicateError(err);
-          } else if (err.name === "CastError") {
-            err = handlerCastError(err);
-          } else if (err.name === "ValidationError") {
-            err = handleValidationError(err);
-          }
-          sendProdError(err, req, res);
+
+        if (err.code === 11000) err = handlerDuplicateError(err);    
+        else if (err.name === "CastError") err = handlerCastError(err); 
+        else if (err.name === "ValidationError") err = handleValidationError(err);
+        else if (err.name === "TokenExpireError") err = handleTokenExpire(err);
+        else if (err.name === "JsonWebError") err = handleTokenError(err);
+
+        sendProdError(err, req, res);
     }
 }

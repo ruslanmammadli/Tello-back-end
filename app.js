@@ -4,6 +4,7 @@ const mongoose = require("mongoose")
 require("dotenv").config({path:"./config.env"})
 const errorHandler=require("./error/errorHandler")
 const GlobalError=require("./error/GlobalError")
+const cors = require("cors");
 
 const productRouter=require("./routes/productRouter")
 const userRouter=require("./routes/userRouter")
@@ -16,6 +17,7 @@ if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));
 }
 
+app.use(cors());
 app.use(express.json())
 
 

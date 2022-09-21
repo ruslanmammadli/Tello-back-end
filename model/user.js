@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const validator = require('validator')
 const bcrypt = require("bcryptjs")
-
-//name, email, password photo, role
+const crypto = require("crypto");
+const { type } = require('os');
 
 const userSchema=mongoose.Schema({
        name:{
@@ -35,12 +35,21 @@ const userSchema=mongoose.Schema({
         }
        },
 
+       forgetPassword:String,
+
+       role:{
+        type: String,
+        enum:["user", "admin", "guide"],
+        delete: "user",
+       },
+
        photo:String,
     },
     {timestamps:true}
 )
 
 userSchema.pre("save", async function(next){
+    if(!this.isModified("password")) return next()
     this.password = await bcrypt.hash(this.password, 12)
     this.passwordConfirm = undefined
     
@@ -52,6 +61,15 @@ userSchema.methods.checkPassword = async function(
     cryptedPassword
 ){
     return await bcrypt.compare(realPassword.toString(), cryptedPassword)
+}
+
+userSchema.methods.generatePassToken = async function () {
+    const resetToken = crypto.randomBytes(48).toString("hex")
+
+    this.forgetPassword = await bcrypt.hash(resetToken, 8)
+
+    return resetToken;
+
 }
 
 
