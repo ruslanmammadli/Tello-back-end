@@ -10,7 +10,7 @@ function sendDevError(err,req,res,statusCode){
 }
 function sendProdError(err,req,res){
     if(err.Operational){
-        res.json({
+        res.status(500).json({
             success:false,
             mesage: err.message
         })

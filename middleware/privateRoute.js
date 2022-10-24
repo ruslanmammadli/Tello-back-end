@@ -5,7 +5,6 @@ const {asyncCatch} = require("../utils/asyncCatch")
 const User = require("../model/user");
 const { resolveSoa } = require("dns");
 
-
 const privateRoute = asyncCatch( async (req,res,next) => {
     let token;
 
@@ -44,7 +43,6 @@ const access = (...roles) => {
         next()
     }
 }
-
 
 module.exports = {privateRoute,access} 
 

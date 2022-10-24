@@ -10,12 +10,35 @@ const userSchema=mongoose.Schema({
         required: [true, "Please provide a name!"]
        },
 
+       lastName:{
+        type: String,
+        required: [true, "Please provide a lastName!"]
+       },
+
        email:{
         type: String,
-        unique: true,
+        unique: [true,"Invalid email address"],
         lowercase: true,
         required: [true],
-        validate:[validator.isEmail, "Provide a correct an email!"]
+        validate:[
+            {
+            validator: validator.isEmail,
+            message: "Provide a correct an email!"
+            },
+            {
+                validator: async function(email) {
+                    const user = await this.constructor.findOne({ email });
+                    if(user) {
+                      if(this.id === user.id) {
+                        return true;
+                      }
+                      return false;
+                    }
+                    return true;
+                  },
+                  message: props => 'The specified email address is already in use.'
+            },
+        ],
        },
 
        password:{
@@ -35,8 +58,17 @@ const userSchema=mongoose.Schema({
         }
        },
 
-       forgetPassword:String,
+       phone:{
+            type: String,
+            required: [true, "Please confirm the phone number!"],
+            match: /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{2}(-|\s)\d{2}$/,
+       },
 
+       forgetPassword: {
+        type: String,
+      },
+
+      resetExpires: Date,
        role:{
         type: String,
         enum:["user", "admin", "guide"],
@@ -48,13 +80,13 @@ const userSchema=mongoose.Schema({
     {timestamps:true}
 )
 
-userSchema.pre("save", async function(next){
-    if(!this.isModified("password")) return next()
-    this.password = await bcrypt.hash(this.password, 12)
-    this.passwordConfirm = undefined
-    
-    next()
-})
+userSchema.pre("save", async function (next) {
+    if (!this.isModified("password")) return next();
+    this.password = await bcrypt.hash(this.password, 12);
+    this.passwordConfirm = undefined;
+  
+    next();
+  });
 
 userSchema.methods.checkPassword = async function(
     realPassword, 
@@ -66,10 +98,12 @@ userSchema.methods.checkPassword = async function(
 userSchema.methods.generatePassToken = async function () {
     const resetToken = crypto.randomBytes(48).toString("hex")
 
-    this.forgetPassword = await bcrypt.hash(resetToken, 8)
+    const hashPassword = crypto.createHash("md5").update(resetToken).digest("hex")
+
+    this.forgetPassword = hashPassword;
+    this.resetExpires=Date.now() + 15 * 60 * 1000;
 
     return resetToken;
-
 }
 
 
