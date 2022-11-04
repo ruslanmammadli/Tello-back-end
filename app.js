@@ -10,6 +10,10 @@ const helmet = require("helmet")
 
 const productRouter=require("./routes/productRouter")
 const userRouter=require("./routes/userRouter")
+const categoryRouter = require("./routes/categoryRouter");
+const reviewRouter=require('./routes/reviewRouter');
+const basketRouter=require('./routes/basketRouter')
+
 
 const limiter = rateLimit({
 	windowMs: 15 * 60 * 1000, // 15 minutes
@@ -38,6 +42,9 @@ app.use(limiter)
 //!Routes
 app.use("/api/v1/products",productRouter);
 app.use("/api/v1/users",userRouter);
+app.use("/api/v1/categories", categoryRouter);
+app.use("/api/v1/reviews", reviewRouter);
+app.use("/api/v1/basket",basketRouter)
 
 app.use((req,res,next) => {
     const message = new GlobalError(`The ${req.originalUrl} does not exists!`)

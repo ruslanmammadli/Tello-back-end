@@ -4,6 +4,9 @@ const jwt = require("jsonwebtoken")
 const GlobalError = require("../error/GlobalError")
 const sendEmail =require("../utils/email")
 const crypto = require("crypto")
+const Email = require("../utils/email");
+
+
 
 function signJWT(id){
     const token = jwt.sign({id: id}, process.env.JWT_SIGNATURE,{
@@ -22,6 +25,12 @@ exports.signup = asyncCatch(async(req,res,next)=>{
         passwordConfirm: req.body.passwordConfirm,
         phone:req.body.phone
     })
+
+
+    const url = 'http://localhost:3000/login';
+
+    const emailHandler = new Email(user, url);
+    await emailHandler.sendWelcome();
 
     const token = signJWT(user._id)
 
@@ -62,15 +71,14 @@ exports.forgetPassword = asyncCatch(async(req,res,next)=>{
     const passwordToken = await user.generatePassToken()
     await user.save({validateBeforeSave:false})
 
-    const path = `Please follow the link to change password: ${
-        req.protocol
-    }://${req.get("host")}/api/v1/${passwordToken}`
+    // const path = `${
+    //     req.protocol
+    // }://${req.get("host")}/api/v1/${passwordToken}`
 
-    await sendEmail({
-        email: user.email,
-        subject: "Change password!",
-        message: path
-    })
+    const url = `http://localhost:3000/users/resetPassword/${passwordToken}`;
+
+    const emailHandler = new Email(user, url);
+    await emailHandler.sendResetPassword();
 
     res.json({
         message: "Email sent",

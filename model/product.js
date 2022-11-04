@@ -14,6 +14,9 @@ const productSchema=mongoose.Schema({
             type:Number,
             required:[true, "Product price must be defined!"]
         },
+        description:{
+            type:String
+        },
         // discount:{
         //     type:Number,
         //     validate:{
@@ -35,17 +38,42 @@ const productSchema=mongoose.Schema({
             type:[String],
             required:[true, "Product colors must be defined!"]
         },
-        images:{
-            type:[String]
+        assets: [
+          {
+            type: {
+              url: String,
+              publicId: String,
+            },
+            required: [true, "Assets array is required."],
+          },
+        ],
+        sku:String,
+        category:[{
+            type: mongoose.Schema.Types.ObjectId,
+            ref:"category",
+            required:[true,"Category id must be defined!"]
+        }],
+        ratingsAverage: {
+            type: Number,
+            default: 4.5,
         },
-        imageCover:{
-            type:String,
-            required:[true, "Product image must be defined!"]
+        ratingsQuantity: {
+            type: Number,
+            default: 0,
         },
     },
     {timestamps:true}
 )
 
+// productSchema.virtual("image").get(function () {
+//   return this.assets[0];
+// });
+
+productSchema.virtual("reviews", {
+    ref: "review",
+    foreignField: "product",
+    localField: "_id",
+  });
 
 const Product=mongoose.model("product",productSchema)
 

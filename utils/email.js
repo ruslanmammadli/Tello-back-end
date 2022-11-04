@@ -1,23 +1,53 @@
-const nodemailer = require("nodemailer")
+const nodemailer = require("nodemailer");
+const pug = require("pug");
 
-const sendEmail = async (option) => {
-    const transport = nodemailer.createTransport({
-        host: process.env.EMAIL_HOST,
-        port: process.env.EMAIL_PORT,
-        auth: {
-          user: process.env.EMAIL_USERNAME,
-          pass: process.env.EMAIL_PASSWORD
-        }
+class Email {
+  constructor(user, url) {
+    this.to = user.email;
+    this.from = process.env.EMAIL_FROM;
+    this.firstName = user.name;
+    this.url = url;
+    this.sender=process.env.SENDER;
+  }
+
+  newTransport() {
+    return nodemailer.createTransport({
+      host: process.env.EMAIL_HOST,
+      port: process.env.EMAIL_PORT,
+      auth: {
+        user: process.env.EMAIL_USERNAME,
+        pass: process.env.EMAIL_PASSWORD,
+      },
     });
+  }
 
-    const mailOptions={
-        from: "Ruslan Mammadli (ruslan.mlee@gmail.com)",
-        to: option.email,
-        subject: option.subject,
-        text: option.message
-    }
+  async send(template, subject) {
+    //*1 Get Proper Template
+    const html = pug.renderFile(`${__dirname}/../views/${template}.pug`, {
+      firstName: this.firstName,
+      url: this.url,
+      email: this.to,
+      sender:this.sender
+    });
+    //*2 Create Options
+    const mailOptions = {
+      from: this.from,
+      to: this.to,
+      subject,
+      html,
+    };
+    //*3 Send Email
 
-    await transport.sendMail(mailOptions)
+    await this.newTransport().sendMail(mailOptions);
+  }
+  
+  async sendWelcome() {
+    await this.send("welcome", "Welcome to the Tello Family!");
+  }
+
+  async sendResetPassword() {
+    await this.send("reset", "Please Reset Password!");
+  }
 }
 
-module.exports = sendEmail;
+module.exports = Email;

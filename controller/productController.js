@@ -2,6 +2,7 @@ const Product = require("../model/product")
 const GlobalFilter = require("../utils/GlobalFilter")
 const {asyncCatch} = require("../utils/asyncCatch")
 const GlobalError = require("../error/GlobalError")
+const cloudinary = require("../utils/cloudinary");
 
 exports.getAllProducts = asyncCatch( async (req,res) => {
 
@@ -37,7 +38,20 @@ exports.getOneProduct=asyncCatch( async (req,res,next) => {
 
 exports.createProduct= asyncCatch( async (req,res,next) => {
    
-    const newProduct = await Product.create(req.body)
+    const images = [];
+    const request = { ...req.body };
+  
+    if (req.files) {
+      for (const el of req.files) {
+        const img = await cloudinary.uploader.upload(el.path);
+        images.push({ url: img.secure_url, publicId: img.public_id });
+        
+      }
+  
+      request.assets = images;
+    }
+
+    const newProduct = await Product.create(request)
     
     res.status(201).json({
         success:true,
@@ -81,5 +95,19 @@ exports.deleteProduct= asyncCatch( async (req,res,next) => {
     }) 
 })
 
+
+exports.searchProducts = asyncCatch(async (req, res, next) => {
+  const products = await Product.find({
+    name: { $regex: req.query.name, $options: "i" },
+  });
+
+  res.status(200).json({
+    succes: true,
+    length: products.length,
+    data: {
+      products,
+    },
+  });
+});
 
 

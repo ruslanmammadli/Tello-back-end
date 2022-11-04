@@ -12,7 +12,8 @@ function sendProdError(err,req,res){
     if(err.Operational){
         res.status(500).json({
             success:false,
-            mesage: err.message
+            message: err.message,
+            error:err,
         })
     }else{
         res.json({
@@ -47,10 +48,10 @@ const handleTokenError = (err) =>{
 module.exports=(err,req,res,next)=>{
     const statusCode=err.statusCode || 500; 
 
-    if (process.env.NODE_ENV === "development") {
+    if (process.env.NODE_ENV === "production") {
         sendDevError(err,req,res,statusCode)
     
-    }else if(process.env.NODE_ENV === "production"){
+    }else if(process.env.NODE_ENV === "development"){
 
         if (err.code === 11000) err = handlerDuplicateError(err);    
         else if (err.name === "CastError") err = handlerCastError(err); 
